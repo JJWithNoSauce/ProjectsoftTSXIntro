@@ -1,6 +1,6 @@
 import { Card, CardContent, CardMedia } from "../../components/Card";
 import { Typography } from "../../components/Typography";
-import { animalList } from "./AnimalData";
+import { animalList } from "./animalData";
 
 function Animal() {
   return (
