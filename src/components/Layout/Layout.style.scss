@@ -1,0 +1,15 @@
+.layout{    
+    .layout-menu{
+        padding: 12px 24px;
+        background-color: #ccc;
+
+        .layout-list{
+            list-style-type: none;
+            display: flex;
+            
+            .layout-item{
+                padding: 12px;
+            }
+        }
+    }
+}
