@@ -12,7 +12,7 @@ function Layout() {
             <a href="/animal">Animal</a>
           </li>
           <li className="layout-item">
-            <a href="/table">Table</a>
+            <a href="/user">User</a>
           </li>
         </ul>
       </nav>
