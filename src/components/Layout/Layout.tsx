@@ -11,6 +11,9 @@ function Layout() {
           <li className="layout-item">
             <a href="/animal">Animal</a>
           </li>
+          <li className="layout-item">
+            <a href="/table">Table</a>
+          </li>
         </ul>
       </nav>
       <div>
