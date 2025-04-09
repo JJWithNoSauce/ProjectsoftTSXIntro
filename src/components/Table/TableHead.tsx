@@ -1,5 +1,11 @@
-function TableHead() {
-    return ( <div></div> );
+type TableHeadProps = {
+    children: React.ReactNode;
+  };
+
+function TableHead({ children }: TableHeadProps) {
+    return ( <div>
+        {children}
+    </div> );
 }
 
 export default TableHead;
