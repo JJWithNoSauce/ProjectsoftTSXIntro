@@ -1,9 +1,27 @@
 .table {
+    border-spacing: 0px;
     .table-head{
-        .table-row{
-            .table-cell{
-                
-            }
+        .table-row .table-cell{
+            font-weight: 600;
+            font-size: 24px;
         }
     }
+    .table-row{
+        .table-cell{
+            padding: 6px 12px;
+            border: 1px solid #777;
+        }
+        .table-cell-left{
+            text-align: left;
+        }
+        .table-cell-center{
+            text-align: center;
+        }
+        .table-cell-right{
+            text-align: right;
+        }
+
+    }
 }
+
+

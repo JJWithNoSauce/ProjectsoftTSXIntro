@@ -4,7 +4,7 @@ type TableProps = {
 
 function Table({ children }: TableProps) {
     return ( <div>
-        <table>{children}</table>
+        <table className="table">{children}</table>
     </div> );
 }
 

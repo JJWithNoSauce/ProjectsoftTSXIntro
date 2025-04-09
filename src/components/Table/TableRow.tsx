@@ -5,7 +5,7 @@ type TableRowProps = {
 
 function TableRow({ children }: TableRowProps) {
     return (
-        <tr className="row">
+        <tr className="table-row">
             {children}
         </tr>
     );

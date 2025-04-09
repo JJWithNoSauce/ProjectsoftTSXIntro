@@ -3,9 +3,9 @@ type TableHeadProps = {
   };
 
 function TableHead({ children }: TableHeadProps) {
-    return ( <div>
+    return ( <thead className="table-head">
         {children}
-    </div> );
+    </thead> );
 }
 
 export default TableHead;

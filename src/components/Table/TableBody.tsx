@@ -3,9 +3,9 @@ type TableBodyProps = {
   };
 
 function TableBody({ children }: TableBodyProps) {
-    return ( <div>
+    return ( <tbody className="table-body">
         {children}
-    </div> );
+    </tbody> );
 }
 
 export default TableBody;
