@@ -1,120 +1,134 @@
+import {
+  AppBar,
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Typography,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+} from "@mui/material";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import { AccountCircle } from "@mui/icons-material";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
+
+type Router = {
+  name: string;
+  url: string;
+};
 
 function Layout() {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [auth, setAuth] = useState(true);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [open, setOpen] = useState(false);
+
+  const router: Router[] = [
+    { name: "Home", url: "/" },
+    { name: "Animal", url: "/animal" },
+    { name: "User", url: "/user" },
+    { name: "Pokemon", url: "/pokemon" },
+  ];
+
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+      <List>
+        {router.map((text, index) => (
+          <ListItem key={text.name} disablePadding>
+            <ListItemButton component="a" href={text.url}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text.name} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
   return (
     <main className="layout">
-      <div className="layout-header">
-        <div className="header-fixed">
-          <div className="header-inner">
-            {/* <span className="hamburger">header ☰</span> */}
-            <button
-              className="menu-hamburger"
-              onClick={() => {
-                setOpenMenu((prev) => !prev);
-              }}
-            >
-              &#x2630;
-            </button>
-            {/* <span>&#x2630;</span> */}
-            <div className="button-group">
-              <button>b1</button>
-              <button>b2</button>
-              <button>b3</button>
-              <button>b4</button>
-              <button>b5</button>
-              <button>b6</button>
-              <button>b7</button>
-              <button>b8</button>
-              <button>b9</button>
-              <button>b10</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="layout-container">
-        <div className="layout-nav">
-          <nav
-            className={`layout-menu ${openMenu ? "layout-menu-active" : ""}`}
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+            onClick={toggleDrawer(true)}
           >
-            <ul className="layout-list">
-              <li className="layout-item">
-                <a href="/">Home</a>
-              </li>
-              <li className="layout-item">
-                <a href="/animal">Animal</a>
-              </li>
-              <li className="layout-item">
-                <a href="/user">User</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-              <li className="layout-item">
-                <a href="/pokemon">Pokemon</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div className="layout-body">
-          <div>
-            <Outlet />
-          </div>
-        </div>
+            <MenuIcon />
+          </IconButton>
+          <Drawer open={open} onClose={toggleDrawer(false)}>
+            {DrawerList}
+          </Drawer>
+
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Photos
+          </Typography>
+          {auth && (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+              </Menu>
+            </div>
+          )}
+        </Toolbar>
+      </AppBar>
+
+      <div>
+        <Outlet />
       </div>
-      <div className="layout-footer">this is a footer</div>
     </main>
   );
 }

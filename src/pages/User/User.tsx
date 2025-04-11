@@ -1,16 +1,31 @@
 import { useMemo, useState } from "react";
-import { Pagination } from "../../components/Pagination/";
+// import { Pagination } from "../../components/Pagination/";
+// import {
+//   Table,
+//   TableBody,
+//   TableCell,
+//   TableHead,
+//   TableRow,
+//   TableSortLabel,
+// } from "../../components/Table";
+
+import { UserData, userList } from "./userList";
+import { OrderData } from "../../type.global";
+// import { TextField } from "../../components/TextField";
 import {
+  Box,
+  Divider,
+  Pagination,
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
+  TablePagination,
   TableRow,
   TableSortLabel,
-} from "../../components/Table";
-import { UserData, userList } from "./userList";
-import { OrderData } from "../../type.global";
-import { TextField } from "../../components/TextField";
+  TextField,
+} from "@mui/material";
 
 type SortType = "string" | "date" | "number";
 type Order = {
@@ -24,7 +39,7 @@ type SearchData = {
 };
 
 function User() {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [pagePerSize, setPagePerSize] = useState(10);
   const [orderBy, setOrderBy] = useState<keyof UserData | null>(null);
   const [order, setOrder] = useState<Order>({
@@ -98,7 +113,7 @@ function User() {
     });
     setTotalData(filterData.length);
 
-    const startItem = (currentPage - 1) * pagePerSize;
+    const startItem = currentPage * pagePerSize;
     const endItem = startItem + pagePerSize;
     return result.slice(startItem, endItem);
   }, [
@@ -111,90 +126,112 @@ function User() {
   ]);
   return (
     <div>
-      <TextField
-        type="string"
-        name="name"
-        id="search"
-        label="search name: "
-        value={searchData.name}
-        onChange={onSearchChange}
-        // onKeyUp={() => setSearchInput()}
-        placeholder="Search for names.."
-      />
-      <TextField
-        name="age"
-        type="number"
-        id="search"
-        label="search age: "
-        value={searchData.age}
-        onChange={onSearchChange}
-        // onKeyUp={() => setSearchInput()}
-        placeholder="Search for age.."
-      />
-      <TextField
-        type="date"
-        name="birth"
-        id="search"
-        label="search birth: "
-        value={searchData.birth}
-        onChange={onSearchChange}
-        // onKeyUp={() => setSearchInput()}
-        placeholder="Search for birth.."
-      />
-
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">
-              <TableSortLabel
-                active={orderBy === "name"}
-                direction={order.order}
-                onClick={() => onSort("name", "string")}
-              >
-                Name
-              </TableSortLabel>
-            </TableCell>
-            <TableCell align="center">
-              <TableSortLabel
-                active={orderBy === "age"}
-                direction={order.order}
-                onClick={() => onSort("age", "number")}
-              >
-                Age
-              </TableSortLabel>
-            </TableCell>
-            <TableCell align="center">
-              <TableSortLabel
-                active={orderBy === "birth"}
-                direction={order.order}
-                onClick={() => onSort("birth", "date")}
-              >
-                Date of Birth
-              </TableSortLabel>
-            </TableCell>
-          </TableRow>
-        </TableHead>
-
-        <TableBody>
-          {dataList.map((user, index) => (
-            <TableRow key={index}>
-              <TableCell>{user.name}</TableCell>
-              <TableCell align="right">{user.age}</TableCell>
-              <TableCell>{user.birth}</TableCell>
+      <Box
+        component="form"
+        sx={{ "& > :not(style)": { m: 1, width: "25ch" } }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          fullWidth
+          variant="standard"
+          type="string"
+          name="name"
+          id="search"
+          label="search name: "
+          value={searchData.name}
+          onChange={onSearchChange}
+          // onKeyUp={() => setSearchInput()}
+          placeholder="Search for names.."
+        />
+        <TextField
+          fullWidth
+          variant="standard"
+          name="age"
+          type="number"
+          id="search"
+          label="search age: "
+          value={searchData.age}
+          onChange={onSearchChange}
+          // onKeyUp={() => setSearchInput()}
+          placeholder="Search for age.."
+        />
+        <TextField
+          fullWidth
+          variant="standard"
+          type="date"
+          name="birth"
+          id="search"
+          label="search birth: "
+          value={searchData.birth}
+          onChange={onSearchChange}
+          // onKeyUp={() => setSearchInput()}
+          placeholder="Search for birth.."
+          slotProps={{
+            inputLabel: {
+              shrink: true,
+            },
+          }}
+        />
+      </Box>
+      <Divider />
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">
+                <TableSortLabel
+                  active={orderBy === "name"}
+                  direction={order.order}
+                  onClick={() => onSort("name", "string")}
+                >
+                  Name
+                </TableSortLabel>
+              </TableCell>
+              <TableCell align="center">
+                <TableSortLabel
+                  active={orderBy === "age"}
+                  direction={order.order}
+                  onClick={() => onSort("age", "number")}
+                >
+                  Age
+                </TableSortLabel>
+              </TableCell>
+              <TableCell align="center">
+                <TableSortLabel
+                  active={orderBy === "birth"}
+                  direction={order.order}
+                  onClick={() => onSort("birth", "date")}
+                >
+                  Date of Birth
+                </TableSortLabel>
+              </TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
 
-      <Pagination
-        count={totalData}
-        page={currentPage}
-        sizePerPage={pagePerSize}
-        siblingCount={1}
-        onChangePage={(page) => setCurrentPage(page)}
-        onChangeRow={(row) => setPagePerSize(row)}
-        customRowPerPage={[10, 20, 30, 40, 50]}
-      />
+          <TableBody>
+            {dataList.map((user, index) => (
+              <TableRow key={index}>
+                <TableCell align="center">{user.name}</TableCell>
+                <TableCell align="center">{user.age}</TableCell>
+                <TableCell align="center">{user.birth}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        <TablePagination
+          component="div"
+          count={totalData}
+          page={currentPage}
+          rowsPerPage={pagePerSize}
+          // siblingCount={1}
+          onPageChange={(_, page) => setCurrentPage(page)}
+          onRowsPerPageChange={(row) =>
+            setPagePerSize(parseInt(row.target.value, 10))
+          }
+          // customRowPerPage={[10, 20, 30, 40, 50]}
+        />
+      </TableContainer>
     </div>
   );
 }

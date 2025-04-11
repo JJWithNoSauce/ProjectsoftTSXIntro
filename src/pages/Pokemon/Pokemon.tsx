@@ -10,7 +10,8 @@ import {
 } from "../../components/Table";
 import { Pagination } from "../../components/Pagination";
 import TableContatiner from "../../components/Table/TableContainer";
-import { TextField } from "../../components/TextField";
+//import { TextField } from "../../components/TextField";
+import TextField from "@mui/material/TextField";
 
 type PokemonData = {
   name: string;
@@ -151,7 +152,7 @@ function Pokemon() {
   }, []);
   return (
     <div>
-      <TextField
+      {/* <TextField
         type="string"
         name="name"
         id="search"
@@ -160,8 +161,20 @@ function Pokemon() {
         onChange={onSearchChange}
         // onKeyUp={() => setSearchInput()}
         placeholder="Search for names.."
+      /> */}
+
+      <TextField
+        id="outlined-basic"
+        label="Outlined"
+        variant="outlined"
+        type="text"
+        name="name"
+        value={searchData}
+        onChange={onSearchChange}
+        placeholder="Search for names.."
       />
       <button onClick={onSearchPokemon}>ค้นหา</button>
+
       <TableContatiner loading={loading}>
         <Table>
           <TableHead>

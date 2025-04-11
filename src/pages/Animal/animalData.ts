@@ -17,7 +17,7 @@ export const animalList: AnimalData[] = [
   {
     name: "penguin",
     description: "Penguins are flightless birds that live in the Southern Hemisphere, especially Antarctica.",
-    img: "https://upload.wikimedia.org/wikipedia/commons/e/e0/King_Penguin_Manchot_royal.jpg"
+    img: "https://th-thumbnailer.cdn-si-edu.com/jG8haOu2X-7lqGeV2chRkAWLoS8=/1000x750/filters:no_upscale():focal(1500x1129:1501x1130)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer_public/f0/f9/f0f9bbfa-95ed-403e-9b8c-2a1319221765/1_-_40c5e881-9d50-4143-853f-69b1f936a16a.jpg"
   },
   {
     name: "giraffe",
@@ -42,16 +42,21 @@ export const animalList: AnimalData[] = [
   {
     name: "dolphin",
     description: "Dolphins are highly intelligent marine mammals known for their playful behavior.",
-    img: "https://upload.wikimedia.org/wikipedia/commons/2/23/Common_dolphin_noaa.jpg"
+    img: "https://2seewhales.com/wp-content/uploads/2019/03/dolphin-906176_1920-1024x638.jpg"
   },
   {
     name: "owl",
     description: "Owls are nocturnal birds of prey with excellent hearing and vision.",
-    img: "https://upload.wikimedia.org/wikipedia/commons/1/12/Western_Screech-Owl.jpg"
+    img: "https://gpnc.org/wp-content/uploads/2017/12/Great_Horned_Owl_Bob_Gress_120116_0784_KS.jpg"
   },
   {
     name: "zebra",
     description: "Zebras are African equids known for their distinctive black-and-white striped coats.",
-    img: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Plains_Zebra_Equus_quagga.jpg"
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Plains_Zebra_Equus_quagga_cropped.jpg/640px-Plains_Zebra_Equus_quagga_cropped.jpg"
+  },
+  {
+    name: "Human",
+    description: "jj ???",
+    img: "https://www.dailynews.co.th/wp-content/uploads/2023/07/10-31.jpg"
   }
 ];
