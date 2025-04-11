@@ -1,15 +1,230 @@
-.layout{    
-    .layout-menu{
-        padding: 12px 24px;
-        background-color: #ccc;
+* {
+  box-sizing: border-box;
+}
+// .layout {
+//   .header {
+//     position: sticky;
+//     top: 0;
+//     width: 100%;
+//     background-color: #f1f1f1;
+//     padding: 16px 24px;
+//     font-weight: 600;
+//     font-size: 22px;
+//     text-align: center;
+//     color: #333;
+//     z-index: 100;
+//     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+//     display: flex;
+//     flex-direction: column;
+//     align-items: flex-start;
+//   }
 
-        .layout-list{
-            list-style-type: none;
-            display: flex;
-            
-            .layout-item{
-                padding: 12px;
-            }
-        }
+//   .button-group {
+//     margin-top: 4px;
+//     display: flex;
+//     flex-wrap: wrap;
+//     gap: 8px;
+//     justify-content: flex-start;
+//   }
+
+//   .button-group button {
+//     padding: 8px 16px;
+//     background-color: #4caf50;
+//     color: white;
+//     border: none;
+//     border-radius: 4px;
+//     cursor: pointer;
+//     font-weight: 500;
+//   }
+
+//   .button-group button:hover {
+//     background-color: #45a049;
+//   }
+
+//   .layout-nav {
+//     width: 300px;
+//   }
+
+//   .layout-menu {
+//     float: left;
+//     top: 0;
+//     position: fixed;
+//     text-align: center;
+//     background-color: #ccc;
+//     display: flex;
+//     flex-direction: column;
+//     width: 300px;
+//     height: 100vh;
+//     justify-content: space-between;
+
+//     .layout-list {
+//       list-style-type: none;
+//       padding: 10px;
+//       overflow-y: scroll;
+
+//       .layout-item {
+//         padding: 20px;
+//         font-size: 20px;
+//       }
+//     }
+//   }
+// }
+
+// .footer {
+//   top: 0;
+//   float: top;
+//   padding: 12px 24px;
+//   font-weight: 600;
+//   font-size: 20px;
+//   position: sticky;
+//   text-align: center;
+// }
+
+// .body {
+//   padding: 50px;
+//   position: relative;
+// //   display: flex;
+//   box-sizing: border-box;
+//   margin-top: 0px;
+//   border: 1px solid #00f;
+//   width: calc(100% - 300px);
+// }
+
+.layout {
+  .layout-container .layout-nav .layout-menu.layout-menu-active {
+    left: 0;
+  }
+  .menu-hamburger {
+    display: none;
+  }
+  border: 2px solid #0f0;
+  .layout-header {
+    position: relative;
+    height: 80px;
+    z-index: 10;
+
+    .header-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      border: 2px solid #f00;
+      background-color: #ccc;
+      display: flex;
+      justify-content: center;
     }
+
+    .header-inner {
+      width: calc(100% - (24px * 2));
+      border: 2px solid rgb(12, 163, 227);
+    }
+  }
+  .layout-container {
+    position: relative;
+    border: 2px solid #f0f;
+    display: flex;
+    z-index: 8;
+    min-height: calc(100vh - 80px - 150px);
+
+    .layout-nav {
+      width: 300px;
+      z-index: 8;
+      position: relative;
+      transition: all 0.8s ease-in-out;
+
+      .layout-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 300px;
+        border: 2px solid #ff0;
+        padding-top: 80px;
+        padding-bottom: 150px;
+        background-color: #fff;
+        transition: all 0.25s ease-in-out;
+      }
+
+      .layout-list {
+        border: 2px solid rgb(255, 0, 174);
+        list-style: none;
+        max-height: calc(100vh - 80px - 150px);
+        overflow-y: auto;
+
+        .layout-item {
+          padding: 44px 6px;
+        }
+      }
+    }
+    .layout-body {
+      border: 2px solid #00f;
+      width: calc(100% - 300px);
+      padding: 24px;
+      z-index: 7;
+      position: relative;
+    }
+  }
+  .layout-footer {
+    border: 2px solid #0ff;
+    position: relative;
+    width: 100%;
+    height: 150px;
+    background-color: #f0f;
+    z-index: 10;
+  }
+  @media screen and (max-width: 992px) {
+    .menu-hamburger {
+      display: block;
+      padding: 12px;
+    }
+    .layout-container {
+      .layout-nav {
+        width: 0px;
+        .layout-menu {
+          left: -300px;
+        }
+      }
+      .layout-body {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.div1,
+.div2,
+.div3,
+.div4 {
+  min-width: 100px;
+  min-height: 50px;
+}
+.div1 {
+  border: 2px solid #f00;
+
+  @media screen and (max-width: 900px) {
+    border: 2px solid #0f0;
+
+    .div2 .div3 {
+      border: 2px solid #f0f;
+    }
+  }
+  .div2 {
+    .div3 {
+      border: 2px solid #00f;
+    }
+  }
+  .div2.div2-1 {
+  }
+  .div2 {
+    display: flex;
+
+    &.div2-1 {
+    }
+  }
+  .div2 .div3 {
+  }
+
+  .div4 {
+  }
 }

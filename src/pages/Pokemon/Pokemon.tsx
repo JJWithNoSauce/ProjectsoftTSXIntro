@@ -10,6 +10,7 @@ import {
 } from "../../components/Table";
 import { Pagination } from "../../components/Pagination";
 import TableContatiner from "../../components/Table/TableContainer";
+import { TextField } from "../../components/TextField";
 
 type PokemonData = {
   name: string;
@@ -54,6 +55,8 @@ function Pokemon() {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
 
+  const [searchData, setSearchData] = useState<string>("");
+
   const getPokemon = async (page: number, pageSize: number) => {
     setLoading(true);
     try {
@@ -81,6 +84,21 @@ function Pokemon() {
       console.log("error:", error);
     }
     setLoading(false);
+  };
+
+  const onSearchPokemon = async () => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${searchData}/`;
+    if (!searchData) {
+      return getPokemon(currentPage, pageSize);
+    }
+    try {
+      const res = await getPokemonDetail(url);
+      console.log("res:", res);
+      setPokemonList([res]);
+    } catch (error) {
+      console.log("error:", error);
+      setPokemonList([]);
+    }
   };
 
   const getPokemonDetail = (url: string) => {
@@ -120,11 +138,30 @@ function Pokemon() {
     setPageSize(row);
   };
 
+  const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log("event:", event);
+    // console.log("event:", event.target.name);
+    // console.log("event:", event.target.value);
+    // console.log("Hey I'm called!");
+    setSearchData(event.target.value);
+  };
+
   useEffect(() => {
     getPokemon(currentPage, pageSize);
   }, []);
   return (
     <div>
+      <TextField
+        type="string"
+        name="name"
+        id="search"
+        label="search name: "
+        value={searchData}
+        onChange={onSearchChange}
+        // onKeyUp={() => setSearchInput()}
+        placeholder="Search for names.."
+      />
+      <button onClick={onSearchPokemon}>ค้นหา</button>
       <TableContatiner loading={loading}>
         <Table>
           <TableHead>
