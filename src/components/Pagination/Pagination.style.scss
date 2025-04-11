@@ -1,4 +1,5 @@
 .pagination{
+    display: grid;
     // background-color: #f00;
     // padding: 8px 16px;
     .pagination-neutral{
@@ -6,7 +7,7 @@
         padding: 8px 16px;
     }
     .pagination-active{
-        background-color: transparent;
+        background-color: #f00;
         font-weight: 600;
         padding: 8px 16px;
     }

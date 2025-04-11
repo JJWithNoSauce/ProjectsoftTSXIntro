@@ -46,7 +46,7 @@ function TsVariableTemplate() {
   // object feature
   useEffect(() => {
     let obj: DataObject = { name: "anc", age: 10 };
-    console.log("obj:", obj);
+    //console.log("obj:", obj);
     // variable name,variable type, value of variable
     // use object: object.variable in object
     // 1) obj.age
@@ -56,10 +56,10 @@ function TsVariableTemplate() {
 
     // override variable
     let obj1 = { ...obj, name: "xyz" }; // ...obj for rejection variable relative
-    console.log("obj1:", obj1);
+    //console.log("obj1:", obj1);
     // or
     let obj2 = { ...obj };
-    console.log("obj2:", obj2);
+    //console.log("obj2:", obj2);
     obj2.name = "ttt";
 
     // object to array
@@ -79,7 +79,7 @@ function TsVariableTemplate() {
     let obj3: Omit<DataObject, "name"> & { name?: DataObject["name"] } = {
       ...obj,
     };
-    console.log("obj3:", obj3);
+    //console.log("obj3:", obj3);
     delete obj3.name;
     // delete obj3.age;
   }, []);
@@ -135,6 +135,27 @@ function TsVariableTemplate() {
       totalAge += item.age;
     });
   }, []);
+
+  const fetchApi = (url: string) => {
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then(async (response) => {
+          console.log("response:", response);
+          const data = await response.json();
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
+
+  const returnReject = () => {
+    return new Promise((resolve, reject) => {
+      resolve("api success");
+      // reject(new Error("401 unauthen"));
+    });
+  };
   // funtion
   useEffect(() => {
     // short function
@@ -153,6 +174,25 @@ function TsVariableTemplate() {
     // function Component: function ButtonItem(){ return <div>xxx</div>}
     // function Component: function ButtonItem({x1:number,x2:number}){ return <div>xxx</div>}
     //
+    // type: ()=> Promise<any>
+    const callApiInit = async () => {
+      try {
+        const res = await fetchApi("https://pokeapi.co/api/v2/pokemon");
+        console.log("res:", res);
+      } catch (error) {}
+    };
+
+    callApiInit();
+
+    const getSomeThing = async () => {
+      try {
+        const x = await returnReject();
+        console.log("x:", x);
+      } catch (error) {
+        console.log("error:", error);
+      }
+    };
+    getSomeThing();
   }, []);
 
   return (

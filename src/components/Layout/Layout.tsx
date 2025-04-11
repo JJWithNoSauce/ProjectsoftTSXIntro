@@ -14,6 +14,9 @@ function Layout() {
           <li className="layout-item">
             <a href="/user">User</a>
           </li>
+          <li className="layout-item">
+            <a href="/pokemon">Pokemon</a>
+          </li>
         </ul>
       </nav>
       <div>
